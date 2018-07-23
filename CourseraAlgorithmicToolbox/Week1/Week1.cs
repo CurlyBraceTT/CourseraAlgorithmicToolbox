@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Xunit;
+using Xunit.Sdk;
 
 namespace CourseraAlgorithmicToolbox.Week1
 {
@@ -13,11 +14,10 @@ namespace CourseraAlgorithmicToolbox.Week1
         [InlineData(9000000000, "2", "100000 90000")]
         public void MaxPairwiseProductTest(ulong expected, params string[] args)
         {
-            Utils.SetInput(args);
-            var output = Utils.SetOutput();
-            MaxPairwiseProduct.Main(args);
-            var result = ulong.Parse(output.ToString());
-            Assert.Equal(expected, result);
+            using (ConsoleExaminator<ulong>.Exam(expected, args))
+            {
+                MaxPairwiseProduct.Main(args);
+            }
         }
     }
 }
