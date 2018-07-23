@@ -2,6 +2,7 @@
 
 namespace CourseraAlgorithmicToolbox.Week1
 {
+    [Trait("Category", "Week1")]
     public class Week1
     {
         [Theory]
