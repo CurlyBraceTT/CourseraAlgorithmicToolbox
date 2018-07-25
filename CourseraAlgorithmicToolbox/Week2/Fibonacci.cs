@@ -18,7 +18,6 @@ namespace CourseraAlgorithmicToolbox.Week2
             for (ulong i = 2; i <= n; i++)
             {
                 f = f0 + f1;
-
                 f0 = f1;
                 f1 = f;
             }
