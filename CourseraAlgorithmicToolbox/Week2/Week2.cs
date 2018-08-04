@@ -75,5 +75,16 @@ namespace CourseraAlgorithmicToolbox.Week2
                 FibonacciSumLastDigit.Main(args);
             }
         }
+
+        [Theory]
+        [InlineData(1, "3 7")]
+        [InlineData(5, "10 10")]
+        public void FibonacciPartialSumFact(ulong expected, params string[] args)
+        {
+            using (ConsoleExaminator<ulong>.Exam(expected, args))
+            {
+                FibonacciPartialSum.Main(args);
+            }
+        }
     }
 }
