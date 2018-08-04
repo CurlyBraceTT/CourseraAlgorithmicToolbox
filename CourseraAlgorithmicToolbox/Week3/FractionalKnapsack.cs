@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CourseraAlgorithmicToolbox.Week3
 {
     public class FractionalKnapsack
     {
+        public struct Item
+        {
+            public ulong Value;
+            public ulong Weight;
+        }
+
         public static void Main(string[] args)
         {
             var firstLine = Console.ReadLine().Split(' ');
@@ -12,23 +19,30 @@ namespace CourseraAlgorithmicToolbox.Week3
             uint n = uint.Parse(firstLine[0]);
             ulong w = ulong.Parse(firstLine[1]);
 
-            var items = new List<(ulong value, ulong weight)>();
+            var items = new List<Item>();
 
-            for(var i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var line = Console.ReadLine().Split(' ');
-                var item = ( value: ulong.Parse(line[0]), weight: ulong.Parse(line[1]));
+                var item = new Item()
+                {
+                    Value = ulong.Parse(line[0]),
+                    Weight = ulong.Parse(line[1])
+                };
                 items.Add(item);
             }
 
-            items.Sort((a, b) => ((double)b.value / b.weight).CompareTo((double)a.value / a.weight));
+            items.Sort((a, b) => ((double)b.Value / b.Weight).CompareTo((double)a.Value / a.Weight));
 
             double sum = 0;
             double wholeValue = 0;
             while(sum < w && items.Count > 0)
             {
-                foreach(var (value, weight) in items)
+                foreach(var item in items)
                 {
+                    var weight = item.Weight;
+                    var value = item.Value;
+
                     if(sum + weight <= w)
                     {
                         sum += weight;
@@ -44,7 +58,12 @@ namespace CourseraAlgorithmicToolbox.Week3
                 items.RemoveAt(0);
             }
 
-            Console.WriteLine($"{wholeValue:N4}");
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            nfi.NumberGroupSeparator = string.Empty;
+            var x = wholeValue.ToString("N4", nfi);
+
+            Console.WriteLine(x);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace CourseraAlgorithmicToolbox.Week3
         }
 
         [Theory]
-        [InlineData("180,0000", "3 50", "60 20", "100 50", "120 30")]
-        [InlineData("166,6667", "1 10", "500 30")]
+        [InlineData("180.0000", "3 50", "60 20", "100 50", "120 30")]
+        [InlineData("166.6667", "1 10", "500 30")]
         public void FractionalKnapsackTheory(string expected, params string[] args)
         {
             using (ConsoleExaminator<string>.Exam(expected, new StringIgnoreLineEndsComparer(), args))
