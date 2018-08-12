@@ -58,9 +58,11 @@ namespace CourseraAlgorithmicToolbox.Week3
                 items.RemoveAt(0);
             }
 
-            NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = ".";
-            nfi.NumberGroupSeparator = string.Empty;
+            NumberFormatInfo nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = ".",
+                NumberGroupSeparator = string.Empty
+            };
             var x = wholeValue.ToString("N4", nfi);
 
             Console.WriteLine(x);
