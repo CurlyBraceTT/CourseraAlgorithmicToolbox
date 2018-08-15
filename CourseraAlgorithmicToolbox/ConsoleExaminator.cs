@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Xunit;
@@ -30,18 +31,25 @@ namespace CourseraAlgorithmicToolbox
             Console.SetOut(writer);
         }
 
-        public void Dispose()
+        public virtual void Compare(TExpected expected, TExpected actual)
         {
-            var result = (TExpected)Convert.ChangeType(Output.ToString(), typeof(TExpected));
-
-            if(Comparer != null)
+            if (Comparer != null)
             {
-                Assert.Equal(Expected, result, Comparer);
+                Assert.Equal(Expected, actual, Comparer);
             }
             else
             {
-                Assert.Equal(Expected, result);
+                Assert.Equal(Expected, actual);
             }
+        }
+
+        public virtual void Dispose()
+        {
+            var readerActual = new StringReader(Output.ToString());
+            var actualStr = readerActual.ReadLine().Trim();
+
+            var actual = (TExpected)Convert.ChangeType(actualStr, typeof(TExpected));
+            Compare(Expected, actual);
         }
 
         public static ConsoleExaminator<TExpected> Exam(TExpected expected,
