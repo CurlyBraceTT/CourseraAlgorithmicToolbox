@@ -51,5 +51,16 @@ namespace CourseraAlgorithmicToolbox.Week5
                 LCS2.Main(args);
             }
         }
+
+        [Theory]
+        [InlineData(2, "3", "1 2 3", "3", "2 1 3", "3", "1 3 5")]
+        [InlineData(3, "5", "8 3 2 1 7", "7", "8 2 1 3 8 10 7", "6", "6 8 3 1 4 7")]
+        public void LCS3Theory(int expected, params string[] args)
+        {
+            using (Examinator.Check(expected, args))
+            {
+                LCS3.Main(args);
+            }
+        }
     }
 }
